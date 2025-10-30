@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Travel Booking Portal</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <style>
+    body {
+      background: linear-gradient(to right, #fceabb, #f8b500);
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .card {
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    #bookingForm input[type="range"] {
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">Book Your Dream Destination</h2>
+
+    <!-- Search Filter -->
+    <input type="text" id="searchInput" class="form-control mb-4" placeholder="Search destinations..." autocomplete="on" />
+
+    <!-- Destination Cards -->
+    <div class="row" id="destinationList">
+      <div class="col-md-4 destination-card" data-name="Paris">
+        <div class="card p-3 position-relative" data-toggle="modal" data-target="#bookingModal">
+          <span class="badge badge-info">Popular</span>
+          <h5>Paris</h5>
+          <p>Romantic city with iconic landmarks.</p>
+        </div>
+      </div>
+      <div class="col-md-4 destination-card" data-name="Tokyo">
+        <div class="card p-3 position-relative" data-toggle="modal" data-target="#bookingModal">
+          <span class="badge badge-warning">New</span>
+          <h5>Tokyo</h5>
+          <p>Modern city with rich culture.</p>
+        </div>
+      </div>
+      <div class="col-md-4 destination-card" data-name="New York">
+        <div class="card p-3 position-relative" data-toggle="modal" data-target="#bookingModal">
+          <span class="badge badge-success">Top Rated</span>
+          <h5>New York</h5>
+          <p>The city that never sleeps.</p>
+        </div>
+      </div>
+      <div class="col-md-4 destination-card" data-name="Bali">
+        <div class="card p-3 position-relative" data-toggle="modal" data-target="#bookingModal">
+          <span class="badge badge-danger">Hot Deal</span>
+          <h5>Bali</h5>
+          <p>Tropical paradise with stunning beaches.</p>
+        </div>
+      </div>
+      <div class="col-md-4 destination-card" data-name="Dubai">
+        <div class="card p-3 position-relative" data-toggle="modal" data-target="#bookingModal">
+          <span class="badge badge-dark">Luxury</span>
+          <h5>Dubai</h5>
+          <p>Skyscrapers, shopping, and desert adventures.</p>
+        </div>
+      </div>
+      <div class="col-md-4 destination-card" data-name="Sydney">
+        <div class="card p-3 position-relative" data-toggle="modal" data-target="#bookingModal">
+          <span class="badge badge-primary">Scenic</span>
+          <h5>Sydney</h5>
+          <p>Harbor views and vibrant culture.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Modal -->
+  <div class="modal fade" id="bookingModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <form id="bookingForm" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Book Your Trip</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <input type="text" id="destinationName" class="form-control mb-3" readonly />
+          <input type="text" class="form-control mb-3" placeholder="Your Name" required />
+          <input type="email" class="form-control mb-3" placeholder="Email" required />
+          <input type="date" class="form-control mb-3" required />
+          <label>Budget Range</label>
+          <input type="range" min="1000" max="10000" step="500" class="form-control mb-3" />
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Confirm Booking</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- jQuery and Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Search filter
+    $("#searchInput").on("input", function () {
+      const query = $(this).val().toLowerCase();
+      $(".destination-card").each(function () {
+        const name = $(this).data("name").toLowerCase();
+        $(this).toggle(name.includes(query));
+      });
+    });
+
+    // Load destination name into modal
+    $(".destination-card .card").click(function () {
+      const name = $(this).find("h5").text();
+      $("#destinationName").val(name);
+    });
+
+    // Booking form validation
+    $("#bookingForm").submit(function (e) {
+      e.preventDefault();
+      alert("Booking confirmed for " + $("#destinationName").val());
+      $("#bookingModal").modal("hide");
+    });
+  </script>
+</body>
+</html>
