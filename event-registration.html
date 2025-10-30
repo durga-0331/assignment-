@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technical Symposium Registration</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #ffc0cb, #87cefa); /* pink to blue gradient */
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .modal-form {
+      background: rgba(255, 255, 255, 0.2); /* transparent white */
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .modal-form h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: 500;
+    }
+
+    #preview {
+      background-color: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(5px);
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 576px) {
+      .modal-form {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="modal-form">
+    <h2>Technical Symposium Registration</h2>
+    <form id="registrationForm">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your name" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" required />
+      </div>
+      <div class="form-group">
+        <label for="event">Select Event</label>
+        <input list="events" class="form-control" id="event" placeholder="Choose an event" required />
+        <datalist id="events">
+          <option value="Hackathon">
+          <option value="Paper Presentation">
+          <option value="Tech Quiz">
+          <option value="Code Debugging">
+        </datalist>
+      </div>
+      <div class="form-group">
+        <label for="date">Event Date</label>
+        <input type="date" class="form-control" id="date" required />
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Register</button>
+    </form>
+
+    <div id="preview" class="d-none">
+      <h4>Registration Preview</h4>
+      <p><strong>Name:</strong> <span id="previewName"></span></p>
+      <p><strong>Email:</strong> <span id="previewEmail"></span></p>
+      <p><strong>Event:</strong> <span id="previewEvent"></span></p>
+      <p><strong>Date:</strong> <span id="previewDate"></span></p>
+    </div>
+  </div>
+
+  <!-- jQuery and Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#name, #email, #event, #date').on('focus', function () {
+        $(this).css('border-color', '#007bff');
+      });
+
+      $('#name, #email, #event, #date').on('blur', function () {
+        if ($(this).val() === '') {
+          $(this).css('border-color', 'red');
+        } else {
+          $(this).css('border-color', '#28a745');
+        }
+      });
+
+      $('#registrationForm').on('submit', function (e) {
+        e.preventDefault();
+
+        $('#previewName').text($('#name').val());
+        $('#previewEmail').text($('#email').val());
+        $('#previewEvent').text($('#event').val());
+        $('#previewDate').text($('#date').val());
+
+        $('#preview').removeClass('d-none');
+      });
+    });
+  </script>
+</body>
+</html>

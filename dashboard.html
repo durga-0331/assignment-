@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employee Performance Dashboard</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #343a40;
+      color: white;
+      padding: 10px;
+    }
+
+    nav a {
+      color: white;
+      margin-right: 15px;
+    }
+
+    .card {
+      margin-bottom: 20px;
+    }
+
+    .dark-theme {
+      background-color: #121212;
+      color: #f0f0f0;
+    }
+
+    .dark-theme header {
+      background-color: #1f1f1f;
+    }
+
+    .dark-theme nav {
+      background-color: #222;
+    }
+
+    .dark-theme .card {
+      background-color: #1e1e1e;
+      border-color: #333;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Employee Performance Dashboard</h1>
+    <button id="themeToggle" class="btn btn-light btn-sm float-right">Toggle Theme</button>
+  </header>
+
+  <nav class="px-3">
+    <a href="#">Home</a>
+    <a href="#">Reports</a>
+    <a href="#">Settings</a>
+    <button id="toggleFilters" class="btn btn-sm btn-outline-light float-right">Toggle Filters</button>
+  </nav>
+
+  <main class="container mt-4">
+    <section id="filters" class="mb-4">
+      <div class="card p-3">
+        <h5>Filter Employees</h5>
+        <input type="text" class="form-control" placeholder="Search by name or department" />
+      </div>
+    </section>
+
+    <section id="metrics">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card p-3">
+            <h5>John Doe</h5>
+            <p>Task Completion</p>
+            <div class="progress">
+              <div class="progress-bar bg-success" style="width: 85%;">85%</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3">
+            <h5>Jane Smith</h5>
+            <p>Task Completion</p>
+            <div class="progress">
+              <div class="progress-bar bg-info" style="width: 70%;">70%</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3">
+            <h5>Mike Johnson</h5>
+            <p>Task Completion</p>
+            <div class="progress">
+              <div class="progress-bar bg-warning" style="width: 60%;">60%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center py-3">
+    &copy; 2025 Company Name. All rights reserved.
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+    // Theme toggle
+    document.getElementById("themeToggle").addEventListener("click", function () {
+      document.body.classList.toggle("dark-theme");
+    });
+
+    // jQuery slide toggle for filters
+    $("#toggleFilters").click(function () {
+      $("#filters").slideToggle();
+    });
+  </script>
+</body>
+</html>
