@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background-color: #343a40;
+      color: white;
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+    }
+
+    nav a {
+      margin-right: 15px;
+    }
+
+    section {
+      padding: 60px 0;
+    }
+
+    .card {
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    footer {
+      background-color: #f8f9fa;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #clock {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .greeting {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Hi, I'm Durgadevi</h1>
+    <p class="greeting" id="greetingText"></p>
+    <p id="clock"></p>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Portfolio</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">About Me</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- About Me -->
+  <section id="about" class="bg-light">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>I'm a passionate web developer skilled in HTML, CSS, JavaScript, and backend technologies. I love building responsive, user-friendly websites and learning new tools to improve my craft.</p>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="row" id="projectContainer">
+        <!-- Projects will be loaded here dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="bg-light">
+    <div class="container">
+      <h2>Contact</h2>
+      <form>
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" class="form-control" placeholder="Your name" required />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-control" placeholder="Your email" required />
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea class="form-control" rows="4" placeholder="Your message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Durgadevi. All rights reserved.
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Live Clock
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("clock").textContent = now.toLocaleTimeString();
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Dynamic Greeting
+    const hour = new Date().getHours();
+    let greeting = "Hello!";
+    if (hour < 12) greeting = "Good morning!";
+    else if (hour < 18) greeting = "Good afternoon!";
+    else greeting = "Good evening!";
+    document.getElementById("greetingText").textContent = greeting;
+
+    // jQuery: Smooth scroll and dynamic project loading
+    $(document).ready(function () {
+      // Smooth scroll handled by CSS scroll-behavior
+
+      // Load projects dynamically
+      const projects = [
+        { title: "Chat App", desc: "Real-time chat using Node.js and Socket.IO" },
+        { title: "Portfolio Site", desc: "Responsive personal website using HTML, CSS, JS" },
+        { title: "E-commerce Store", desc: "Shopping cart with product filters and checkout" }
+      ];
+
+      projects.forEach(p => {
+        $("#projectContainer").append(`
+          <div class="col-md-4 mb-4">
+            <div class="card p-3">
+              <h5>${p.title}</h5>
+              <p>${p.desc}</p>
+              <button class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#projectModal">${p.title} Details</button>
+            </div>
+          </div>
+        `);
+      });
+    });
+  </script>
+</body>
+</html>
